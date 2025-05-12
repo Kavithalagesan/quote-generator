@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stress Level Quote Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Stress Level Checker</h1>
+  <form id="stressForm">
+    <div class="question">1. How often do you feel overwhelmed?</div>
+    <input type="range" min="1" max="5" name="q1" required>
+
+    <div class="question">2. How well do you sleep at night?</div>
+    <input type="range" min="1" max="5" name="q2">
+
+    <div class="question">3. How often do you feel anxious?</div>
+    <input type="range" min="1" max="5" name="q3">
+
+    <div class="question">4. How tired do you feel daily?</div>
+    <input type="range" min="1" max="5" name="q4">
+
+    <div class="question">5. How frequently do you take breaks?</div>
+    <input type="range" min="1" max="5" name="q5">
+
+    <div class="question">6. How often do you feel irritable?</div>
+    <input type="range" min="1" max="5" name="q6">
+
+    <div class="question">7. How well do you manage your time?</div>
+    <input type="range" min="1" max="5" name="q7">
+
+    <div class="question">8. How relaxed do you feel most of the time?</div>
+    <input type="range" min="1" max="5" name="q8">
+
+    <div class="question">9. How often do you feel pressure to perform?</div>
+    <input type="range" min="1" max="5" name="q9">
+
+    <div class="question">10. How often do you worry about the future?</div>
+    <input type="range" min="1" max="5" name="q10">
+
+    <button id="submitBtn" type="submit">Get Your Quote</button>
+  </form>
+
+  <div id="quote"></div>
+</div>
+
+<script>
+  const quotes = {
+    low: [
+      "You're calm and in control. Keep it up!",
+      "Peace begins with a smile 😊.",
+      "You radiate positive vibes."
+    ],
+    moderate: [
+      "You're doing okay, but don’t forget to take time for yourself.",
+      "Take a deep breath and trust the process.",
+      "Balance is not something you find, it's something you create."
+    ],
+    high: [
+      "It’s okay to take a break. You deserve peace.",
+      "You’re stronger than your stress. Take it one step at a time.",
+      "Breathe. This too shall pass. 💙"
+    ]
+  };
+
+  document.getElementById("stressForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const inputs = document.querySelectorAll("input[type=range]");
+    let total = 0;
+    inputs.forEach(input => {
+      total += parseInt(input.value);
+    });
+
+    let level;
+    if (total <= 20) level = 'low';
+    else if (total <= 35) level = 'moderate';
+    else level = 'high';
+
+    const selectedQuote = quotes[level][Math.floor(Math.random() * quotes[level].length)];
+    document.getElementById("quote").textContent = `"${selectedQuote}"`;
+  });
+</script>
+
+</body>
+</html>
